@@ -385,6 +385,7 @@ dependencies = [
  "indexmap",
  "minecraft_folder_path",
  "parking_lot",
+ "rand 0.10.2",
  "regex",
  "reqwest",
  "simdnbt",

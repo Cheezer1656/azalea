@@ -26,9 +26,10 @@ use azalea_protocol::{
 use azalea_registry::builtin::EntityKind;
 use azalea_world::{PartialWorld, WorldName, Worlds};
 use bevy_ecs::prelude::*;
+use rand::distr::SampleString;
 pub use events::*;
 use tracing::{debug, error, warn};
-
+use azalea_registry::identifier::Identifier;
 use crate::{
     ClientInformation,
     block_update::QueuedServerBlockUpdates,
@@ -247,7 +248,7 @@ impl GamePacketHandler<'_> {
                     mut world_holder,
                 ) = query.get_mut(self.player).unwrap();
 
-                let new_world_name = WorldName(p.common.dimension.clone());
+                let new_world_name = WorldName(Identifier::new(rand::distr::Alphanumeric.sample_string(&mut rand::rng(), 16)));
 
                 if let Some(mut world_name) = world_name {
                     *world_name = new_world_name.clone();
